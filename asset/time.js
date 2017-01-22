@@ -21,7 +21,7 @@ Time.prototype.setException = function(date, times){
 
 // pass in current date and it will give you the [start,end] times of operation or null
 Time.prototype.getTimes = function(date){
-  var month = date.getMonth();
+  var month = date.getMonth()+1;
 
   if(month < this.from || month > this.to)
     return null;
@@ -34,12 +34,12 @@ Time.prototype.getTimes = function(date){
   return this.getDay(date.getDay());
 }
 
-Time.prototype.setDays = function(m, t, w, th, f, sa, su){
-    this.setDay(0,m);
-    this.setDay(1,t);
-    this.setDay(2,w);
-    this.setDay(3,th);
-    this.setDay(4,f);
-    this.setDay(5,sa);
-    this.setDay(6,su);
+Time.prototype.setDays = function(su, m, t, w, th, f, sa){
+    this.setDay(0,su);
+    this.setDay(1,m);
+    this.setDay(2,t);
+    this.setDay(3,w);
+    this.setDay(4,th);
+    this.setDay(5,f);
+    this.setDay(6,sa);
 }

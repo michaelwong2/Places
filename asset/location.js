@@ -17,6 +17,7 @@ Location.prototype.update = function(name, times, category) {
 
 Location.prototype.isOpen = function(date) {
   curTime = date.getHours();
+  console.log(curTime);
   var times = null;
   for (var i = 0; i < this.attr.times.length; i++) {
     times = this.attr.times[i].getTimes(date);
@@ -24,6 +25,7 @@ Location.prototype.isOpen = function(date) {
       break;
     }
   }
+  console.log(times);
   if (times === null)
     return false;
 
@@ -31,4 +33,8 @@ Location.prototype.isOpen = function(date) {
     return false;
   else
     return true;
+};
+
+Location.prototype.timeLeft = function(timeNow,times){
+
 };
