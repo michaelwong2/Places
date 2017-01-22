@@ -1,0 +1,45 @@
+#top-bar{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 70px;
+  width: 100vw;
+  background-color:#532ead;
+}
+
+#bottom-bar{
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  height: 50px;
+  width: 100vw;
+  background-color:#532ead;
+}
+
+#main{
+  position: absolute;
+  top: 70px;
+  height: calc(100vh - 120px);
+  width: 100vw;
+  background-color: #2e2c67;
+  overflow-y: scroll;
+}
+
+.tab{
+  height: 50px;
+  width: 33.3vw;
+  float: left;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+}
+
+.nothing-alerter{
+  height: calc(100vh - 120px);
+  width: 100vw;
+  float: left;
+  color: white;
+  line-height: calc(100vh - 120px);
+  text-align: center;
+  font-size: 18px;
+}
