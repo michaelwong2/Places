@@ -1,11 +1,32 @@
 <html>
   <head>
-    <script src='asset/test.js'></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="style/global.css">
+    <link rel="stylesheet" type="text/css" href="style/frame.css">
+    <link rel="stylesheet" type="text/css" href="style/button.css">
+
     <script src='asset/storage.js'></script>
     <script src='asset/time.js'></script>
+    <script src='asset/main.js'></script>
     <script src='asset/location.js'></script>
-  </head>
-  <body>
+    <script src='asset/test.js'></script>
 
+  </head>
+  <body onload="//Main.init();">
+    <div id="top-bar"></div>
+    <div id="main">
+      <div class="location-button">
+        <div class="location-name locations-text">LASELL</div>
+        <div class="location-time locations-text">Open until 10</div>
+        <div class="location-events locations-text">No Events are happening here</div>
+        <div class="location-favorite">[]</div>
+      </div>
+    </div>
+    <div id="bottom-bar">
+      <div class="tab" id="favorites-tab">[]</div>
+      <div class="tab" id="categories-tab">[]</div>
+      <div class="tab" id="all-tab">[]</div>
+    </div>
   </body>
 </html>
