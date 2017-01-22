@@ -4,7 +4,7 @@ var Time = function(f, t){
 
   this.days = [null,null,null,null,null,null,null];
 
-  this.exceptions = null;
+  this.exceptions = {};
 }
 
 Time.prototype.setDay = function(day, times){
@@ -15,7 +15,11 @@ Time.prototype.getDay = function(day){
   return this.days[day];
 }
 
-// pass in current date and it will give you the times of operation or null
+Time.prototype.setException = function(date, times){
+  this.exceptions[date] = times;
+}
+
+// pass in current date and it will give you the [start,end] times of operation or null
 Time.prototype.getTimes = function(date){
   var month = date.getMonth();
 
@@ -31,11 +35,11 @@ Time.prototype.getTimes = function(date){
 }
 
 Time.prototype.setDays = function(m, t, w, th, f, sa, su){
-    this.days.setDay(0,m);
-    this.days.setDay(0,t);
-    this.days.setDay(0,w);
-    this.days.setDay(0,th);
-    this.days.setDay(0,f);
-    this.days.setDay(0,sa);
-    this.days.setDay(0,su);
+    this.setDay(0,m);
+    this.setDay(1,t);
+    this.setDay(2,w);
+    this.setDay(3,th);
+    this.setDay(4,f);
+    this.setDay(5,sa);
+    this.setDay(6,su);
 }
