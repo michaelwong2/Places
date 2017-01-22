@@ -7,8 +7,10 @@ window.onload = function() {
   spring.setDays([12,23],[9,23],[9,23],[9,23],[9,23],[9,23],[11,20]);
   var summer = new Time(6,8);
 
-  loc.update('Sawyer', [fall,spring,summer], 'studying');
+  loc.update('Sawyer', [fall,spring,summer], 'studying', false);
   console.log(loc);
   console.log(new Date());
   console.log(loc.isOpen(new Date()));
+
+  Storage.addToFavorites(loc);
 }

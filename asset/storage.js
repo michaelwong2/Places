@@ -8,6 +8,14 @@ Storage = {
   getObject: function(namespace){
     return JSON.parse(window.localStorage.getItem(namespace));
   },
+  findMatch: function(array, match){
+    for(var i = 0; i < array.length; i++){
+      if(array[i].attr.name == match)
+        return true;
+    }
+
+    return false;
+  },
   addToFavorites: function(location){
     // get the object from local storage
     var favs = this.getObject(this._favoritesNameSpace);
@@ -17,7 +25,7 @@ Storage = {
       favs = {
         favarray: []
       }
-    }else if(favs.favarray.indexOf(location) > -1){
+    }else if(this.findMatch(favs.favarray, location.name())){
       // if the location already exists in favorites return
       return;
     }

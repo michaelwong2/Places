@@ -22,7 +22,7 @@ Main = {
       default: page = this.loadFavorites();
     }
 
-    document.getElementById("main").innerHTML = page;
+    this.appendToMain(page);
   },
   switchScreen: function(s){
     this._currentScreen = s;
@@ -40,8 +40,21 @@ Main = {
     var s = "";
 
     for(var i = 0; i < favorites.length; i++){
-      s += "DAD";
+      var thisfav = new Location();
+      thisfav.load(favorites[i].attr);
+
+      s += thisfav.displayable();
     }
 
+    return s;
+
+  },
+  appendToMain: function(text){
+    document.getElementById("main").innerHTML = text + "<div style='height:10px;width:100vw;float:left;'></div>";
   }
+}
+
+Categories = {
+  _categoryList: ["Dining", "Studying", "Health & Fitness" , "24 Hour"],
+
 }

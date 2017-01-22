@@ -34,6 +34,12 @@ Time.prototype.getTimes = function(date){
   return this.getDay(date.getDay());
 }
 
+Time.prototype.load = function(attr){
+  for(var k in attr){
+    this[k] = attr[k];
+  }
+}
+
 Time.prototype.setDays = function(su, m, t, w, th, f, sa){
     this.setDay(0,su);
     this.setDay(1,m);
