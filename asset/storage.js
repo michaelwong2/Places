@@ -1,6 +1,6 @@
 Storage = {
   _favoritesNameSpace: "favorites",
-
+  _locationNameSpace: "locations",
   saveObject: function(namespace, obj){
     var save = JSON.stringify(obj);
     window.localStorage.setItem(namespace, save);
@@ -46,5 +46,18 @@ Storage = {
     // save the new array to local storage
     this.saveObject(this._favoritesNameSpace, favs);
 
+  },
+  addToLocations: function(locations){
+      var locs = this.getObject(this._locationNameSpace);
+
+      if(locs == null){
+        locs = {}
+      }else if(locs[locations.name()] != null){
+        return;
+      }
+
+      locs[locations.name()] = locations;
+
+      this.saveObject(this._locationNameSpace, locs);
   }
 }
