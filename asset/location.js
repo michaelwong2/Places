@@ -60,16 +60,20 @@ Location.prototype.displayable = function(){
 
   var today = new Date();
 
-  var div = '<div class="location-button" style="background-color:' + (this.isOpen(today) ? 'green' : 'red') + ';"><div class="location-name locations-text">'+
+  var open = this.isOpen(today);
+
+  var div = '<div class="location-button" style="background-color:' + (open ? 'green' : 'red') + ';"><div ontouchstart="toggleDropdown(this.children[0].innerHTML)" style="width: 53%;"><div class="location-name locations-text">'+
         this.name().toUpperCase() + '</div><div class="location-time locations-text">' +
         10 + '</div><div class="location-events locations-text">' +
-        'nothing' + '</div>';
+        'nothing' + '</div></div><div class="location-eventtrig" ontouchstart="togglePopout(Events.loadEvents(`' + this.name() + '`));">...</div>';
 
   if(!Storage.hasThisFavorite(this.name())){
-      div += '<div class="location-favorite" id="' + this.name() + '" ontouchstart="getLocationById(this.id).addToFavorites()">[*]</div></div>';
+      div += '<div class="location-favorite" id="' + this.name() + '" ontouchstart="getLocationById(this.id).addToFavorites()">[+]</div></div>';
   }else{
       div += '<div class="location-favorite" id="' + this.name() + '" ontouchstart="getLocationById(this.id).rmFromFavorites()">[x]</div></div>';
   }
+
+  div += '<div id="dp-' + this.name().toLowerCase() + '" class="dropdown" style="display: none;"></div>';
 
   return div;
 }
@@ -109,4 +113,29 @@ function getLocationById(id){
   }
 
   return null;
+}
+
+function toggleDropdown(id){
+    id = "dp-" + id.toLowerCase();
+
+    if(!document.getElementById(id))
+      return;
+
+    x = document.getElementById(id).style.display == "block";
+
+    document.getElementById(id).style.display = !x ? "block" : "none";
+
+    if(!x){
+
+      var elements = document.getElementsByClassName('animateDrop');
+
+      for(var i = 0; i < elements.length; i++){
+        elements[i].style.display = "none";
+        elements[i].className = "dropdown";
+      }
+
+      document.getElementById(id).className += " animateDrop";
+    }else{
+      document.getElementById(id).className = "dropdown";
+    }
 }

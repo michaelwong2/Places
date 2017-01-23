@@ -12,7 +12,7 @@
 .locations-text{
     margin-left: 30px;
     float: left;
-    width: 60%;
+    width: 40%;
     height: auto;
     color: white;
 }
@@ -32,6 +32,14 @@
   margin-top: 5px;
 }
 
+.location-eventtrig{
+  height: 80px;
+  width: 80px;
+  background-color: blue;
+  position: absolute;
+  right: 80px;
+}
+
 .location-favorite{
   height: 80px;
   width: 80px;
@@ -40,6 +48,28 @@
   text-align: center;
   position: absolute;
   right: 0px;
+}
+
+.dropdown{
+  float: left;
+  height: 100px;
+  width: 90vw;
+  margin-left: 5vw;
+  background-color: #c7c7c7;
+
+  border: none;
+  border-top: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+@keyframes drop{
+  0% {height: 0px;}
+  100% {height: 100px;}
+}
+
+.animateDrop{
+  animation: drop 0.6s 1;
 }
 
 /*CATEGORY*/

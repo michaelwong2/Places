@@ -138,4 +138,66 @@ Categories = {
     Main.appendToMain(s);
 
   }
+};
+
+
+/*
+ * ===============================
+ *            search
+ * ===============================
+ */
+
+
+
+Search = {
+  timestamp: (new Date()).getTime(),
+  _searchterms: null,
+  search: function(term){
+    Main.appendToMain("");
+
+    var timenow = (new Date()).getTime();
+
+    if(timenow - this.timestamp > 200000 || this._searchterms == null){
+      this.loadSearchableHash();
+    }
+
+    results = [];
+
+    for(var k in this._searchterms){
+      if(k.toLowerCase().includes(term) || term.includes(k.toLowerCase())){
+        results.push(this._searchterms[k]);
+      }
+    }
+
+    this.renderResults(results);
+
+  },
+  loadSearchableHash: function(){
+    this._searchterms = {};
+
+    var locations = Storage.getObject(Storage._locationNameSpace);
+
+    if(locations == null){
+      Main.appendToMain("<div class='nothing-alerter'>No Locations</div>");
+      return;
+    }
+
+    var s = "";
+
+    for(var k in locations){
+      thisloc = new Location();
+      thisloc.load(locations[k].attr);
+      this._searchterms[thisloc.name()] = thisloc;
+    }
+
+  },
+  renderResults: function(results){
+    var s = "";
+
+    for(var i = 0; i < results.length; i++){
+      s += results[i].displayable();
+    }
+
+    Main.appendToMain(s);
+  }
 }

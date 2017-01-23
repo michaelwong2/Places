@@ -11,15 +11,22 @@
     <script src='asset/main.js'></script>
     <script src='asset/location.js'></script>
     <script src='asset/test.js'></script>
+    <script src='asset/events.js'></script>
 
 
   </head>
   <body onload="Main.init();">
-    <div id="top-bar"></div>
+    <div id="popout">
+      <div id="event-displayer"></div>
+    </div>
+    <div id="top-bar">
+      <div id="search-icon" ontouchstart="Search.search(document.getElementById('search-bar').value);"></div>
+      <input id="search-bar" placeholder="Search places on campus" oninput="Search.search(this.value);"/>
+    </div>
     <div id="main"></div>
     <div id="bottom-bar">
       <div class="tab" id="favorites-tab" ontouchstart="Main.switchScreen(0)">[*]</div>
-      <div class="tab" id="all-tab" ontouchstart="Main.switchScreen(2)">[All]</div>
+      <div class="tab" id="all-tab" ontouchstart="Main.switchScreen(2)">[open]</div>
       <div class="tab" id="categories-tab" ontouchstart="Main.switchScreen(1)">[Cat]</div>
       <div class="tab" id="categories-tab" ontouchstart="Main.switchScreen(3)">[Food]</div>
     </div>
