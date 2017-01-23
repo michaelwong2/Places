@@ -40,32 +40,32 @@ window.onload = function(){
 
   // hollander
   var hollander = new Location();
-  fall.setDays([19,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[19,00]],[0,[00,00]]);
-  spring.setDays([19,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[19,00]],[0,[00,00]]);
+  fall.setDays([19,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[19,00]],null);
+  spring.setDays([19,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[19,00]],null);
   hollander.update('Hollander', [fall,spring,summer], 'studying', false);
 
   // schapiro
   var schapiro = new Location();
-  fall.setDays([19,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[19,00]],[0,[00,00]]);
-  spring.setDays([19,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[19,00]],[0,[00,00]]);
+  fall.setDays([19,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[19,00]],null);
+  spring.setDays([19,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[19,00]],null);
   schapiro.update('Schapiro', [fall,spring,summer], 'studying', false);
 
   // spencer
   var spencer = new Location();
-  fall.setDays([0,[00,00]],[0,[24,00]],[0,[24,00]],[0,[24,00]],[0,[24,00]],[0,[24,00]],[0,[00,00]]);
-  spring.setDays([0,[00,00]],[0,[24,00]],[0,[24,00]],[0,[24,00]],[0,[24,00]],[0,[24,00]],[0,[00,00]]);
+  fall.setDays(null,[0,[24,00]],[0,[24,00]],[0,[24,00]],[0,[24,00]],[0,[24,00]],null);
+  spring.setDays(null,[0,[24,00]],[0,[24,00]],[0,[24,00]],[0,[24,00]],[0,[24,00]],null);
   spencer.update('Spencer', [fall,spring,summer], 'studying', false);
 
   // hopkins
   var hopkins = new Location();
-  fall.setDays([0,[00,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[0,[00,00]]);
-  spring.setDays([0,[00,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[0,[00,00]]);
+  fall.setDays(null,[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],null);
+  spring.setDays(null,[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],null);
   hopkins.update('Hopkins', [fall,spring,summer], 'studying', false);
 
   // hopkins
   var hopkins = new Location();
-  fall.setDays([0,[00,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[0,[00,00]]);
-  spring.setDays([0,[00,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[0,[00,00]]);
+  fall.setDays(null,[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],null);
+  spring.setDays(null,[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],[8,[24,00]],null);
   hopkins.update('Hopkins', [fall,spring,summer], 'studying', false);
 
   // goodrich
@@ -76,8 +76,8 @@ window.onload = function(){
 
   // griffin
   var griffin = new Location();
-  fall.setDays([19,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[19,00]],[0,[00,00]]);
-  spring.setDays([19,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[19,00]],[0,[00,00]]);
+  fall.setDays([19,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[19,00]],null);
+  spring.setDays([19,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[23,00]],[6,[19,00]],null);
   griffin.update('Griffin', [fall,spring,summer], 'studying', false);
 
   // hardy
@@ -113,6 +113,24 @@ window.onload = function(){
   fall.setDays([0,[0,00]],[6,[21,00]],[6,[21,00]],[6,[21,00]],[6,[21,00]],[6,[21,00]],[0,[0,00]]);
   spring.setDays([0,[0,00]],[6,[21,00]],[6,[21,00]],[6,[21,00]],[6,[21,00]],[6,[21,00]],[0,[0,00]]);
   towne.update('Towne Field', [fall,spring,summer], 'health & fitness', false);
+
+  // mission
+  var mission = new Location();
+  fall.setDays([9,[20,00]],[8,[20,00]],[8,[20,00]],[8,[20,00]],[8,[20,00]],[8,[20,00]],[8,[20,00]]);
+  spring.setDays([9,[20,00]],[8,[20,00]],[8,[20,00]],[8,[20,00]],[8,[20,00]],[8,[20,00]],[8,[20,00]]);
+  mission.update('Mission', [fall,spring,summer], 'dining', false);
+
+  // Lee
+  var lee = new Location();
+  fall.setDays([21,[24,00]],[8,[16,30]],[8,[16,30]],[8,[24,00]],[8,[24,00]],[8,[2,00]],[21,[2,00]]);
+  spring.setDays([21,[24,00]],[8,[16,30]],[8,[16,30]],[8,[24,00]],[8,[24,00]],[8,[2,00]],[21,[2,00]]);
+  lee.update('Lee', [fall,spring,summer], 'dining', false);
+
+  // Eco
+  var eco = new Location();
+  fall.setDays([0,[0,00]],[8,[14,00]],[8,[14,00]],[8,[14,00]],[8,[14,00]],[8,[14,00]],[0,[0,00]]);
+  spring.setDays([0,[0,00]],[8,[14,00]],[8,[14,00]],[8,[14,00]],[8,[14,00]],[8,[14,00]],[0,[0,00]]);
+  eco.update('Eco', [fall,spring,summer], 'dining', false);
 
   /*'62 center
     Chapin

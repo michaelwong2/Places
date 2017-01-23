@@ -87,6 +87,11 @@ Location.prototype.weekSchedule = function(date) {
   var nextDay = date;
   var day = null;
   var dayName = null;
+
+  if( this.attr.allthetime == true) {
+    return '24 hour';
+  }
+
   for (var k = 0; k < 5; k++) {
     nextDay = this.nextDay(nextDay);
     // console.log(nextDay);
@@ -102,6 +107,11 @@ Location.prototype.weekSchedule = function(date) {
       case 5: dayName = 'Friday'; break;
       case 6: dayName = 'Saturday';
     }
+
+    // if (this.attr.allthetime == true) {
+    //   schedule[k] = {day: dayName, t: true};
+    //
+    // }
 
     var times = [];
     for (var i = 0; i < this.attr.times.length; i++) {
@@ -249,9 +259,19 @@ Location.prototype.displayable = function(){
 
   var schedule = this.weekSchedule(today);
 
-  for(var i = 0; i < schedule.length; i++){
-    div += '<div class="upcoming-schedule-row">' + schedule[i].day + '<div class="schedule-times">' + schedule[i].t[0] + " to " + (schedule[i].t[1][0] > 12 ? schedule[i].t[1][0] - 12 : schedule[i].t[1][0] ) + '</div></div>';
+  if (schedule === '24 hour') {
+    div += '<div class="upcoming-schedule-row">Open 24 hours a day!</div>';
+  } else {
+    for(var i = 0; i < schedule.length; i++){
+      if (schedule[i].t == null || (schedule[i].t[0] == null && schedule[i].t[1][0] == null)) {
+        div += '<div class="upcoming-schedule-row">' + schedule[i].day + '<div class="schedule-times">closed</div></div>';
+        continue;
+      }
+      div += '<div class="upcoming-schedule-row">' + schedule[i].day + '<div class="schedule-times">' + schedule[i].t[0] + " to " + (schedule[i].t[1][0] > 12 ? schedule[i].t[1][0] - 12 : schedule[i].t[1][0] ) + '</div></div>';
+    }
   }
+
+
 
   div += '</div>';
 
