@@ -235,7 +235,7 @@ Location.prototype.displayable = function(){
     div += "Closes in " + timeUntil.hours + " hours";
   }
 
-  div += '</div><div class="location-events locations-text">' + 'nothing' +
+  div += '</div><div class="location-events locations-text">' +
   '</div></div><div class="location-eventtrig" ontouchstart="togglePopout(Events.loadEvents(`' + this.name() +
   '`));"></div>';
 

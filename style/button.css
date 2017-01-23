@@ -12,18 +12,14 @@
 .locations-text{
     margin-left: 30px;
     float: left;
-<<<<<<< HEAD
-    width: 80%;
-=======
     width: 70%;
->>>>>>> 955b20c397d4f192c34a52599ba38981d4e863cf
     height: auto;
     color: white;
 }
 
 .location-name{
   font-size: 18px;
-  margin-top: 5px;
+  margin-top: 17px;
   color: #f2f1ef;
 }
 
