@@ -181,12 +181,12 @@ Location.prototype.displayable = function(){
   var div = '<div class="location-button" style="background-color:' + (open ? 'green' : 'red') + ';"><div ontouchstart="toggleDropdown(this.children[0].innerHTML)" style="width: 53%;"><div class="location-name locations-text">'+
         this.name().toUpperCase() + '</div><div class="location-time locations-text">' +
         10 + '</div><div class="location-events locations-text">' +
-        'nothing' + '</div></div><div class="location-eventtrig" ontouchstart="togglePopout(Events.loadEvents(`' + this.name() + '`));">...</div>';
+        'nothing' + '</div></div><div class="location-eventtrig" ontouchstart="togglePopout(Events.loadEvents(`' + this.name() + '`));"><img src="res/Event.png" height="5" width="20" style="z-index:9; margin-top: 39px;"></div>';
 
   if(!Storage.hasThisFavorite(this.name())){
-      div += '<div class="location-favorite" id="' + this.name() + '" ontouchstart="getLocationById(this.id).addToFavorites()">[+]</div></div>';
+      div += '<div class="location-favorite" id="' + this.name() + '" ontouchstart="getLocationById(this.id).addToFavorites()"><img src="res/Star_inactive.png" height="20" width="20" style="z-index:9; margin-top: 30px;"></div></div>';
   }else{
-      div += '<div class="location-favorite" id="' + this.name() + '" ontouchstart="getLocationById(this.id).rmFromFavorites()">[x]</div></div>';
+      div += '<div class="location-favorite" id="' + this.name() + '" ontouchstart="getLocationById(this.id).rmFromFavorites()"><img src="res/Star.png" height="20" width="20" style="z-index:9; margin-top: 30px;"></div></div>';
   }
 
   div += '<div id="dp-' + this.name().toLowerCase() + '" class="dropdown" style="display: none;"></div>';
@@ -195,16 +195,31 @@ Location.prototype.displayable = function(){
 }
 
 Location.prototype.addToFavorites = function(){
-  console.log("Adding to favorites");
+  // console.log("Adding to favorites");
   Storage.addToFavorites(this.name());
 
-  Main.loadPage();
+
+
+
+  if(Main._currentScreen == 1)
+      Categories.loadCategory(Categories._currCategory);
+  else
+      Main.loadPage();
+
 }
 
 Location.prototype.rmFromFavorites = function(){
-  console.log("Removing from favorites");
+  // console.log("Removing from favorites");
   Storage.removeFromFavorites(this.name());
-  Main.loadPage();
+
+
+
+
+  if(Main._currentScreen == 1)
+      Categories.loadCategory(Categories._currCategory);
+  else
+      Main.loadPage();
+
 }
 
 

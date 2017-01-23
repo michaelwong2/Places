@@ -23,15 +23,15 @@
       <div id="event-displayer"></div>
     </div>
     <div id="top-bar">
-      <div id="search-icon" ontouchstart="Search.search(document.getElementById('search-bar').value);"></div>
+      <div id="search-icon" ontouchstart="Search.search(document.getElementById('search-bar').value);"><img src="res/Search.png" height="40" width="35"></div>
       <input id="search-bar" placeholder="Search places on campus" oninput="Search.search(this.value);"/>
     </div>
     <div id="main"></div>
     <div id="bottom-bar">
-      <div class="tab" id="favorites-tab" ontouchstart="Main.switchScreen(0)">[*]</div>
-      <div class="tab" id="all-tab" ontouchstart="Main.switchScreen(2)">[open]</div>
-      <div class="tab" id="categories-tab" ontouchstart="Main.switchScreen(1)">[Cat]</div>
-      <div class="tab" id="categories-tab" ontouchstart="Main.switchScreen(3)">[Food]</div>
+      <div class="tab" id="favorites-tab" ontouchstart="Main.switchScreen(0)"><img src="res/Star_bar.png" height="25" style="margin-top:13px;"></div>
+      <div class="tab" id="all-tab" ontouchstart="Main.switchScreen(2)"><img src="res/Open.png" height="25" style="margin-top:13px;"></div>
+      <div class="tab" id="categories-tab" ontouchstart="Main.switchScreen(1)"><img src="res/Categ.png" height="25" style="margin-top:13px;"></div>
+      <div class="tab" id="categories-tab" ontouchstart="Main.switchScreen(3)"><img src="res/Food.png" height="25" style="margin-top:13px;"></div>
     </div>
   </body>
 </html>
