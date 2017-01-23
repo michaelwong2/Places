@@ -88,10 +88,7 @@ Location.prototype.nextDay = function(today) {
   var date = today.getDate();
   var month = today.getMonth()+1;
   var year = today.getFullYear();
-
-  if (date <= 27) {
-      console.log(date + month + year);
-      today.setDate(date+1);
+}
 
 Location.prototype.displayable = function(){
 
@@ -129,9 +126,11 @@ Location.prototype.rmFromFavorites = function(){
 }
 
 Location.prototype.timeLeft = function(timeNow,times){
-
-
-  }else {
+/*
+if (date <= 27) {
+    console.log(date + month + year);
+    today.setDate(date+1);
+  }else{
     switch(date) {
       case 28:
         if (month === 2) {
@@ -177,8 +176,8 @@ Location.prototype.timeLeft = function(timeNow,times){
         }
     }
   }
-  return today;
-};
+  return today;*/
+}
 
 function getLocationById(id){
   var locations = Storage.getObject(Storage._locationNameSpace);

@@ -72,14 +72,16 @@ input#search-bar{
   position: absolute;
   z-index: 10;
   top: 70px;
+  display: none;
 }
 
   #event-displayer{
     height: 300px;
     width: 90vw;
-    background-color: #aaeeaa;
+    background-color: #aac8ee;
     position: absolute;
     z-index: 11;
-    left: 5vw;
+    left: calc(5vw - 5px);
     top: 100px;
+    padding: 5px;
   }
