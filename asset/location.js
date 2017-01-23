@@ -38,15 +38,16 @@ Location.prototype.name = function(){
 
 Location.prototype.isOpen = function(date) {
   curTime = date.getHours();
-  // console.log(curTime);
+  console.log(this.attr.times);
   var times = null;
   for (var i = 0; i < this.attr.times.length; i++) {
+    console.log(this.attr.times[i]);
     times = this.attr.times[i].getTimes(date);
     if (times != null) {
       break;
     }
   }
-  // console.log(times);
+  console.log(times);
   if (times === null)
     return false;
 
@@ -178,7 +179,7 @@ Location.prototype.displayable = function(){
 
   var open = this.isOpen(today);
 
-  var div = '<div class="location-button" style="background-color:' + (open ? 'green' : 'red') + ';"><div ontouchstart="toggleDropdown(this.children[0].innerHTML)" style="width: 53%;"><div class="location-name locations-text">'+
+  var div = '<div class="location-button" style="background-color:' + (open ? '#03a678' : '#c8626a') + ';"><div ontouchstart="toggleDropdown(this.children[0].innerHTML)" style="width: 53%;"><div class="location-name locations-text">'+
         this.name().toUpperCase() + '</div><div class="location-time locations-text">' +
         10 + '</div><div class="location-events locations-text">' +
         'nothing' + '</div></div><div class="location-eventtrig" ontouchstart="togglePopout(Events.loadEvents(`' + this.name() + '`));"><img src="res/Event.png" height="5" width="20" style="z-index:9; margin-top: 39px;"></div>';

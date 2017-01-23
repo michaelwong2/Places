@@ -1,5 +1,6 @@
 body, html{
   padding: 0px;
+  font-family: 'Montserrat';
   margin: 0px;
 }
 
@@ -10,4 +11,14 @@ body, html{
 input:focus{
   border:none;
   outline: none;
+}
+
+@font-face {
+    font-family: 'Montserrat'; /*a name to be used later*/
+    src: url('../res/Montserrat-Regular.otf'); /*URL to font*/
+}
+
+@font-face {
+    font-family: 'Lora'; /*a name to be used later*/
+    src: url('../res/Lora-Regular.ttf'); /*URL to font*/
 }

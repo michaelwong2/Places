@@ -12,8 +12,8 @@ window.onload = function() {
   // console.log(new Date());
   // console.log(loc.isOpen(new Date()));
 
-  var date = new Date();
-  console.log(loc.weekSchedule(date));
+  // var date = new Date();
+  // console.log(loc.weekSchedule(date));
   // date.setFullYear(2016);
   // date.setDate(29);
   // date.setMonth(1);
@@ -28,6 +28,18 @@ window.onload = function() {
   var summer1 = new Time(6,8);
 
   loc1.update('Lasell', [fall1,spring1,summer1], 'studying', false);
+
+  var loc2 = new Location();
+
+  var fall2 = new Time(9,11);
+  fall2.setDays([12,22],[8,22],[8,22],[8,22],[8,22],[8,22],[10,17]);
+  var spring2 = new Time(1,5);
+  spring2.setDays([12,23],[1,23],[9,23],[9,23],[9,23],[9,23],[11,20]);
+  var summer2 = new Time(6,8);
+
+  loc2.update('Jesup', [fall2,spring2,summer2], 'studying', false);
+  console.log(loc2);
+
 
   // Storage.addToFavorites(loc);
 }
