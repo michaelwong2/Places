@@ -51,6 +51,7 @@ Location.prototype.getTimes = function(date){
 
 Location.prototype.isOpen = function(date) {
   curTime = date.getHours();
+  console.log(curTime);
   console.log(this.attr.times);
   var times = null;
   for (var i = 0; i < this.attr.times.length; i++) {
@@ -104,7 +105,7 @@ Location.prototype.weekSchedule = function(date) {
 };
 
 Location.prototype.timeLeft = function(hour,minute,times){
-  console.log(hour + minute + times);
+  //console.log(hour + minute + times);
   if (hour >= times[0] && hour < times[1][0]) {
     if (minute === 0)
       return {hours: times[1][0] - hour, minutes: times[1][1] - 0};
@@ -198,6 +199,7 @@ Location.prototype.displayable = function(){
   var today = new Date();
 
   var open = this.isOpen(today);
+  console.log(open);
 
   var div = '<div class="location-button" style="background-color:' + (open ? '#03a678' : '#c8626a') + ';"><div ontouchstart="toggleDropdown(this.children[0].innerHTML)" style="width: 53%;"><div class="location-name locations-text">'+
         this.name().toUpperCase() + '</div><div class="location-time locations-text">';
