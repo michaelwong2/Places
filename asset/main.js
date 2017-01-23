@@ -5,7 +5,9 @@ Main = {
     this._currentScreen = Storage.hasFavorites() ? 0 : 2;
     this.loadPage();
   },
-
+  reload: function(){
+    loadFoodFromXML();
+  },
   loadPage: function(){
     var page;
 
@@ -100,7 +102,11 @@ Main = {
     var s = "";
 
     for(var k in loadedfoodevents){
-      s += "<div class='event-button'><div class='event-name'>" + k + "</div><div class='event-name'>@" + loadedfoodevents[k].location + "</div><div class='event-name'>" + loadedfoodevents[k].time + "</div></div>";
+      if(loadedfoodevents[k].time == null)
+        continue;
+
+      s += "<div class='event-button'><div class='event-name'>" + k + "</div><div class='event-name'>@" + loadedfoodevents[k].location + "</div><div class='event-name'>" + (loadedfoodevents[k].time.getMonth()+1) + "/" + loadedfoodevents[k].time.getDate() + " @ " +
+      (loadedfoodevents[k].time.getHours() > 12 ? loadedfoodevents[k].time.getHours() - 12 : loadedfoodevents[k].time.getHours()) + "</div></div>";
     }
 
     return s;

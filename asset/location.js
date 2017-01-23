@@ -262,9 +262,6 @@ Location.prototype.addToFavorites = function(){
   // console.log("Adding to favorites");
   Storage.addToFavorites(this.name());
 
-
-
-
   if(Main._currentScreen == 1)
       Categories.loadCategory(Categories._currCategory);
   else
