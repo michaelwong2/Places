@@ -98,6 +98,7 @@ Main = {
 
 Categories = {
   _categoryList: ["Dining", "Studying", "Health & Fitness" , "24 Hour"],
+  _currCategory: 0,
   load: function(){
 
     var s = "";
@@ -111,6 +112,8 @@ Categories = {
   loadCategory: function(x){
     if(x > this._categoryList.length || x < 0)
       return;
+
+      this._currCategory = x;
 
     var locations = Storage.getObject(Storage._locationNameSpace);
 

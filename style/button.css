@@ -34,10 +34,10 @@
 
 .location-eventtrig{
   height: 80px;
-  width: 80px;
-  background-color: blue;
+  width: 30px;
+  /*background-color: blue;*/
   position: absolute;
-  right: 80px;
+  right: 100px;
 }
 
 .location-favorite{
