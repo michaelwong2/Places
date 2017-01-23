@@ -10,7 +10,7 @@ var Location = function() {
 
 //create a new location
 Location.prototype.update = function(name, times, category, all) {
-  console.log(this);
+  // console.log(this);
   this.attr.name = name;
   this.attr.times = times;
   this.attr.category = category;
@@ -38,7 +38,7 @@ Location.prototype.name = function(){
 
 Location.prototype.isOpen = function(date) {
   curTime = date.getHours();
-  console.log(curTime);
+  // console.log(curTime);
   var times = null;
   for (var i = 0; i < this.attr.times.length; i++) {
     times = this.attr.times[i].getTimes(date);
@@ -46,7 +46,7 @@ Location.prototype.isOpen = function(date) {
       break;
     }
   }
-  console.log(times);
+  // console.log(times);
   if (times === null)
     return false;
 
@@ -57,18 +57,56 @@ Location.prototype.isOpen = function(date) {
 };
 
 Location.prototype.displayable = function(){
-  console.log(this);
 
   var today = new Date();
 
   var div = '<div class="location-button" style="background-color:' + (this.isOpen(today) ? 'green' : 'red') + ';"><div class="location-name locations-text">'+
         this.name().toUpperCase() + '</div><div class="location-time locations-text">' +
         10 + '</div><div class="location-events locations-text">' +
-        'nothing' + '</div><div class="location-favorite">[]</div></div>';
+        'nothing' + '</div>';
+
+  if(!Storage.hasThisFavorite(this.name())){
+      div += '<div class="location-favorite" id="' + this.name() + '" ontouchstart="getLocationById(this.id).addToFavorites()">[*]</div></div>';
+  }else{
+      div += '<div class="location-favorite" id="' + this.name() + '" ontouchstart="getLocationById(this.id).rmFromFavorites()">[x]</div></div>';
+  }
 
   return div;
+}
+
+Location.prototype.addToFavorites = function(){
+  console.log("Adding to favorites");
+  Storage.addToFavorites(this.name());
+
+  Main.loadPage();
+}
+
+Location.prototype.rmFromFavorites = function(){
+  console.log("Removing from favorites");
+  Storage.removeFromFavorites(this.name());
+  Main.loadPage();
 }
 
 Location.prototype.timeLeft = function(timeNow,times){
 
 };
+
+function getLocationById(id){
+  var locations = Storage.getObject(Storage._locationNameSpace);
+
+  if(locations != null){
+    id = id.toLowerCase();
+
+    for(var k in locations){
+      thisloc = new Location();
+      thisloc.load(locations[k].attr);
+
+      if(thisloc.name().toLowerCase() == id){
+        return thisloc;
+      }
+
+    }
+  }
+
+  return null;
+}
