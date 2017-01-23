@@ -266,37 +266,54 @@ Text.prototype.getDate = function() {
   }
 };
 
-Text.prototype.parseTime = function(str, end) {
+Text.prototype.parseTime = function(str, options) {
   var date = this._date;
-  if (end) {
-    if (this._dateEnd == null) {
-      this._dateEnd = this._date;
+    if (options && options.hasOwnProperty("end") && options.end) {
+      if (this._dateEnd == null) {
+        this._dateEnd = new Date();
+        this._dateEnd.setMonth(this._date.getMonth());
+        this._dateEnd.setDate(this._date.getDate());
+      }
+      date = this._dateEnd;
     }
-    date = this._dateEnd;
-  }
+
   if (date != null) {
     var hours = "";
     var minutes = "";
     if (!isNaN(str)) {
         hours = str;
         minutes = "0";
-        date.setHours(parseInt(hours));
+        if (options && options.hasOwnProperty("pm") && options.pm) {
+          date.setHours(parseInt(hours) + 12);
+        } else {
+          date.setHours(parseInt(hours));
+        }
         date.setMinutes(parseInt(minutes));
     } else if (!str.includes("-")) {
       if (str.includes(":")) {
         var s = str.split(":");
         hours = s[0];
         minutes = s[1];
-        date.setHours(parseInt(hours));
+        if (options && options.hasOwnProperty("pm") && options.pm) {
+          date.setHours(parseInt(hours) + 12);
+        } else {
+          date.setHours(parseInt(hours));
+        }
         date.setMinutes(parseInt(minutes));
       }
     } else {
       s = str.split("-");
-      this.parseTime(s[0]);
-      this.parseTime(s[1], true)
+      if (options && options.pm) {
+        this.parseTime(s[0], {pm: true});
+        this.parseTime(s[1], {end: true, pm: true})
+      } else {
+        this.parseTime(s[0]);
+        this.parseTime(s[1], {end: true})
+      }
     }
   }
 }
+
 
     // for the case with spaces between the time and am/pm
 Text.prototype.isAM = function(str, index) {
@@ -348,8 +365,8 @@ Text.prototype.setTime = function() {
             this._words.splice(i - 1, 1);
             break;
         } else if (this.isPM(this._words[i])) {
-            this.parseTime(this._words[i - 1]);
-            this._date.setHours(this._date.getHours() + 12);
+            this.parseTime(this._words[i - 1], {pm: true});
+            //this._date.setHours(this._date.getHours() + 12);
             this._words.splice(i, 1);
             this._words.splice(i - 1, 1);
             break;
@@ -358,13 +375,13 @@ Text.prototype.setTime = function() {
             this._words.splice(i, 1);
             break;
         } else if (this.isPMNoSpace(this._words[i])) {
-            this.parseTime(this._words[i].substring(0, this._words[i].length - 2));
-            this._date.setHours(this._date.getHours() + 12);
+            this.parseTime(this._words[i].substring(0, this._words[i].length - 2), {pm: true});
+            //this._date.setHours(this._date.getHours() + 12);
             this._words.splice(i, 1);
             break;
         } else if (this.isTimeNoAMPM(this._words[i])) {
-            this.parseTime(this._words[i]);
-            this._date.setHours(this._date.getHours() + 12);
+            this.parseTime(this._words[i], {pm: true});
+            //this._date.setHours(this._date.getHours() + 12);
             this._words.splice(i, 1);
             break;
         }

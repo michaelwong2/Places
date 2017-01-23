@@ -16,6 +16,7 @@ var loadFoodFromXML = function() {
 
   var handleXML = function(data) {
     $xmlDoc = $(data);
+    var eventswithfood = {};
     $xmlDoc.find("item").each(function(index) {
       var title = $(this).find("title").text();
       var link = $(this).find("link").text();
@@ -28,24 +29,34 @@ var loadFoodFromXML = function() {
         }
       }
       var content = origContent.toLowerCase();
-      var keywords = ["free", "free food", "free snack", "free snacks", "free drink", "free drinks", "snack will be provided", "snack provided",
+      var keywords = ["free food", "free snack", "free snacks", "free drink", "free drinks", "snack will be provided", "snack provided",
       "snacks will be provided", "snacks provided", "food will be provided", "food provided", "drink will be provided", "drink provided",
       "drinks will be provided", "drinks provided", "refreshment", "free pizza", "pizza", "cookies", "cupcakes", "cupcake", "donut",
       "donuts", "coffee", "apple cider", "beverage"];
 
-      var eventswithfood = {};
+
 
       for (var i = 0; i < keywords.length; i++) {
         if (content.includes(keywords[i])) {
-          console.log(index + ": " + origContent);
-          //
-          eventswithfood[title] = {time: "", location: ""};
+          var data = new Text(content);
+          data.parseWords();
+          data.setMonth();
+          data.setDayFromWord();
+          data.setDayFromNumber();
+          data.setDateFromFormat();
+          data.setDateFromRelative();
+          data.setTime();
+
+          eventswithfood[title] = {time: data.getStartDate(), location: data.getLocation(), content: origContent};
+          console.dir(eventswithfood[title]);
           break;
         }
       }
 
-      Storage.saveObject(Storage._foodNameSpace, eventswithfood);
+
     });
+    console.dir(eventswithfood);
+    Storage.saveObject(Storage._foodNameSpace, eventswithfood);
   }
 
   parseRSS("proxy.php", handleXML);
