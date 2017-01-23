@@ -4,7 +4,7 @@
   left: 0px;
   height: 70px;
   width: 100vw;
-  background-color:#532ead;
+  background-color:#885b8c;
 }
 
 #bottom-bar{
@@ -13,7 +13,7 @@
   bottom: 0px;
   height: 50px;
   width: 100vw;
-  background-color:#532ead;
+  background-color:#885b8c;
 }
 
 #main{
@@ -21,7 +21,7 @@
   top: 70px;
   height: calc(100vh - 120px);
   width: 100vw;
-  background-color: #2e2c67;
+  background-color: #f2f1ef;
   overflow-y: scroll;
 }
 
@@ -38,31 +38,32 @@
   height: calc(100vh - 120px);
   width: 100vw;
   float: left;
-  color: white;
+  color: #ba8d98;
   line-height: calc(100vh - 120px);
   text-align: center;
   font-size: 18px;
 }
 
 #search-icon{
-  height: 40px;
-  width: 40px;
-  background-color: white;
+  height: 20px;
+  width: 20px;
   position: absolute;
-  left: 20px;
+  left: 22px;
   top: 20px;
 }
 
 input#search-bar{
   height: 40px;
   width: 73vw;
+  background-color:#d9cfdd;
   position:absolute;
-  right: 20px;
+  right: 25px;
   top: 20px;
   border: none;
   border-radius: 3px;
   padding-left: 10px;
-  font-size: 20px;
+  font-size: 18px;
+  font-family: 'Montserrat';
 }
 
 #popout{
@@ -72,14 +73,18 @@ input#search-bar{
   position: absolute;
   z-index: 10;
   top: 70px;
+  display: none;
 }
 
   #event-displayer{
-    height: 300px;
+    height: 100px;
     width: 90vw;
-    background-color: #aaeeaa;
+    background-color: #d9cfdd;
     position: absolute;
     z-index: 11;
-    left: 5vw;
-    top: 100px;
+    left: calc(5vw - 5px);
+    top: 150px;
+    border-radius: 8px;
+    padding: 5px;
+    text-align: center;
   }

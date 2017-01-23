@@ -19,10 +19,14 @@ Main = {
       case 2:
         page = this.loadAll();
         break;
+      case 3:
+        page = this.loadFood();
+        break;
       default: page = this.loadFavorites();
     }
 
-    this.appendToMain(page);
+    if(page != null)
+      this.appendToMain(page);
   },
   switchScreen: function(s){
     this._currentScreen = s;
@@ -66,8 +70,10 @@ Main = {
   loadAll: function(){
     var locations = Storage.getObject(Storage._locationNameSpace);
 
+    console.log(locations);
+
     if(locations == null){
-      Main.appendToMain("<div class='nothing-alerter'>No Locations</div>");
+      this.appendToMain("<div class='nothing-alerter'>No Locations</div>");
       return;
     }
 
@@ -76,8 +82,22 @@ Main = {
     for(var k in locations){
       thisloc = new Location();
       thisloc.load(locations[k].attr);
+      // if(thisloc.isOpen(new Date()))
       s += thisloc.displayable();
     }
+
+    return s;
+  },
+  loadFood: function(){
+
+    var loadedfoodevents = null;
+
+    if(loadedfoodevents == null){
+      this.appendToMain("<div class='nothing-alerter'>No Events with Free Food</div>");
+      return;
+    }
+
+    var s = "";
 
     return s;
   },
@@ -98,6 +118,7 @@ Main = {
 
 Categories = {
   _categoryList: ["Dining", "Studying", "Health & Fitness" , "24 Hour"],
+  _currCategory: 0,
   load: function(){
 
     var s = "";
@@ -111,6 +132,8 @@ Categories = {
   loadCategory: function(x){
     if(x > this._categoryList.length || x < 0)
       return;
+
+      this._currCategory = x;
 
     var locations = Storage.getObject(Storage._locationNameSpace);
 

@@ -2,9 +2,9 @@
   height: 80px;
   width: 94vw;
   margin-left: 3vw;
-  background-color: indianred;
+  background-color: #d24d57;
   margin-top: 10px;
-  border-radius: 2px;
+  border-radius: 8px;
   float: left;
   position: relative;
 }
@@ -12,32 +12,38 @@
 .locations-text{
     margin-left: 30px;
     float: left;
-    width: 40%;
+    width: 50%;
     height: auto;
     color: white;
 }
 
 .location-name{
-  font-size: 22px;
+  font-size: 18px;
   margin-top: 5px;
+  color: #f2f1ef;
 }
 
 .location-time{
-  font-size: 16px;
+  font-size: 15px;
   margin-top: 3px;
+  width: auto;
+  color: #f2f1ef;
+  font-family: 'Lora';
 }
 
 .location-events{
   font-size: 15px;
   margin-top: 5px;
+  color: #f2f1ef;
+  font-family: 'Lora';
 }
 
 .location-eventtrig{
   height: 80px;
-  width: 80px;
-  background-color: blue;
+  width: 30px;
+  /*background-color: blue;*/
   position: absolute;
-  right: 80px;
+  right: 100px;
 }
 
 .location-favorite{
@@ -52,10 +58,10 @@
 
 .dropdown{
   float: left;
-  height: 100px;
+  height: 125px;
   width: 90vw;
   margin-left: 5vw;
-  background-color: #c7c7c7;
+  background-color: #d9cfdd;
 
   border: none;
   border-top: none;
@@ -64,12 +70,25 @@
 }
 
 @keyframes drop{
-  0% {height: 0px;}
-  100% {height: 100px;}
+  0% {height: 0px; color: transparent;}
+  85% {height: 125px;}
+  100% {color: black;}
 }
 
 .animateDrop{
   animation: drop 0.6s 1;
+}
+
+.upcoming-schedule-row{
+  height: 25px;
+  width: calc(100% - 10px);
+  line-height: 25px;
+  padding-left: 10px;
+}
+
+.schedule-times{
+  float: right;
+  margin-right: 20px;
 }
 
 /*CATEGORY*/
@@ -80,9 +99,9 @@
   float: left;
   position: relative;
   margin-left: 4vw;
-  background-color: #67809f;
+  background-color: #ba8d98;
   margin-top: 10px;
-  border-radius: 2px;
+  border-radius: 8px;
 
   color: white;
   font-size: 28px;
