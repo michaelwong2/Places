@@ -56,6 +56,38 @@ Location.prototype.isOpen = function(date) {
     return true;
 };
 
+Location.prototype.weekSchedule = function(date) {
+  var schedule = [];
+  var nextDay = date;
+  var day = null;
+  var dayName = null;
+  for (var k = 0; k < 5; k++) {
+    nextDay = this.nextDay(nextDay);
+    console.log(nextDay);
+
+    day = nextDay.getDay();
+    console.log(day);
+    switch(day) {
+      case 0: dayName = 'Sunday'; break;
+      case 1: dayName = 'Monday'; break;
+      case 2: dayName = 'Tuesday'; break;
+      case 3: dayName = 'Wednesday'; break;
+      case 4: dayName = 'Thursday'; break;
+      case 5: dayName = 'Friday'; break;
+      case 6: dayName = 'Saturday';
+    }
+
+    var times = [];
+    for (var i = 0; i < this.attr.times.length; i++) {
+      times = this.attr.times[i].getTimes(nextDay);
+      if (times != null) {
+        break;
+      }
+    }
+    schedule[k] = {day: dayName, t: times};
+  }
+  return schedule;
+};
 
 Location.prototype.timeLeft = function(hour,minute,times){
   if (hour >= times[0] && hour < times[1]) {
@@ -90,7 +122,6 @@ Location.prototype.nextDay = function(today) {
   var year = today.getFullYear();
 
   if (date <= 27) {
-      console.log(date + month + year);
       today.setDate(date+1);
     }else{
       switch(date) {

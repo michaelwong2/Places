@@ -13,10 +13,11 @@ window.onload = function() {
   // console.log(loc.isOpen(new Date()));
 
   var date = new Date();
-  date.setFullYear(2016);
-  date.setDate(29);
-  date.setMonth(1);
-  console.log(loc.nextOpen(date));
+  console.log(loc.weekSchedule(date));
+  // date.setFullYear(2016);
+  // date.setDate(29);
+  // date.setMonth(1);
+  // console.log(loc.nextOpen(date));
 
   var loc1 = new Location();
 
