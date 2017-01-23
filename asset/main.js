@@ -101,12 +101,16 @@ Main = {
 
     var s = "";
 
-    for(var k in loadedfoodevents){
+    for(var k in loadedfoodevents){;
       if(loadedfoodevents[k].time == null)
         continue;
-
-      s += "<div class='event-button'><div class='event-name'>" + k + "</div><div class='event-name'>@" + loadedfoodevents[k].location + "</div><div class='event-name'>" + (loadedfoodevents[k].time.getMonth()+1) + "/" + loadedfoodevents[k].time.getDate() + " @ " +
-      (loadedfoodevents[k].time.getHours() > 12 ? loadedfoodevents[k].time.getHours() - 12 : loadedfoodevents[k].time.getHours()) + "</div></div>";
+      var time = new Date(loadedfoodevents[k].time);
+      var location = "";
+      if (loadedfoodevents[k].location != null) {
+        location = loadedfoodevents[k].location;
+      }
+      s += "<div class='event-button'><div class='event-name'>" + k + "</div><div class='event-name'>@" + location + "</div><div class='event-name'>" + (time.getMonth()+1) + "/" + time.getDate() + " @ " +
+      (time.getHours() > 12 ? time.getHours() - 12 : time.getHours()) + "</div></div>";
     }
 
     return s;
