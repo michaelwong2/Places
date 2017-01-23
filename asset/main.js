@@ -22,7 +22,8 @@ Main = {
       default: page = this.loadFavorites();
     }
 
-    this.appendToMain(page);
+    if(page != null)
+      this.appendToMain(page);
   },
   switchScreen: function(s){
     this._currentScreen = s;
@@ -66,6 +67,8 @@ Main = {
   loadAll: function(){
     var locations = Storage.getObject(Storage._locationNameSpace);
 
+    console.log(locations);
+
     if(locations == null){
       Main.appendToMain("<div class='nothing-alerter'>No Locations</div>");
       return;
@@ -76,6 +79,7 @@ Main = {
     for(var k in locations){
       thisloc = new Location();
       thisloc.load(locations[k].attr);
+      // if(thisloc.isOpen(new Date()))
       s += thisloc.displayable();
     }
 
