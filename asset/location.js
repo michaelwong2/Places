@@ -210,6 +210,7 @@ Location.prototype.displayable = function(){
   var today = new Date();
 
   var open = this.isOpen(today);
+  console.log(open);
 
   console.log(open);
 
