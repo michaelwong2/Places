@@ -1,6 +1,7 @@
 Storage = {
   _favoritesNameSpace: "favorites",
   _locationNameSpace: "locations",
+  _foodNameSpace: "eventsfood",
   saveObject: function(namespace, obj){
     var save = JSON.stringify(obj);
     window.localStorage.setItem(namespace, save);

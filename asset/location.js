@@ -237,7 +237,7 @@ Location.prototype.displayable = function(){
 
   div += '</div><div class="location-events locations-text">' + 'nothing' +
   '</div></div><div class="location-eventtrig" ontouchstart="togglePopout(Events.loadEvents(`' + this.name() +
-  '`));"><img src="res/Event.png" height="5" width="20" style="z-index:9; margin-top: 39px;"></div>';
+  '`));"></div>';
 
   if(!Storage.hasThisFavorite(this.name())){
       div += '<div class="location-favorite" id="' + this.name() + '" ontouchstart="getLocationById(this.id).addToFavorites()"><img src="res/Star_inactive.png" height="20" width="20" style="z-index:9; margin-top: 30px;"></div></div>';

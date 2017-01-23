@@ -90,7 +90,7 @@ Main = {
   },
   loadFood: function(){
 
-    var loadedfoodevents = null;
+    var loadedfoodevents = Storage.getObject(Storage._foodNameSpace);
 
     if(loadedfoodevents == null){
       this.appendToMain("<div class='nothing-alerter'>No Events with Free Food</div>");
@@ -98,6 +98,10 @@ Main = {
     }
 
     var s = "";
+
+    for(var k in loadedfoodevents){
+      s += "<div class='event-button'><div class='event-name'>" + k + "</div><div class='event-name'>@" + loadedfoodevents[k].location + "</div><div class='event-name'>" + loadedfoodevents[k].time + "</div></div>";
+    }
 
     return s;
   },
