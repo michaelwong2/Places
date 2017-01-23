@@ -63,7 +63,7 @@ Location.prototype.isOpen = function(date) {
   if (times === null)
     return false;
 
-  if (curTime < times[0] || curTime >= times[1])
+  if (curTime < times[0] || curTime >= times[1][0])
     return false;
   else
     return true;
@@ -76,10 +76,10 @@ Location.prototype.weekSchedule = function(date) {
   var dayName = null;
   for (var k = 0; k < 5; k++) {
     nextDay = this.nextDay(nextDay);
-    console.log(nextDay);
+    // console.log(nextDay);
 
     day = nextDay.getDay();
-    console.log(day);
+    // console.log(day);
     switch(day) {
       case 0: dayName = 'Sunday'; break;
       case 1: dayName = 'Monday'; break;
@@ -103,11 +103,17 @@ Location.prototype.weekSchedule = function(date) {
 };
 
 Location.prototype.timeLeft = function(hour,minute,times){
-  if (hour >= times[0] && hour < times[1]) {
+  if (hour >= times[0] && hour < times[1][0]) {
     if (minute === 0)
-      return {hours: times[1] - hour, minutes: 0};
+      return {hours: times[1][0] - hour, minutes: times[1][1] - 0};
     else
-      return {hours: times[1] - hour - 1, minutes: 60 - minute};
+      return {hours: times[1][0] - hour - 1, minutes: 60 - times[1][1] - minute};
+  }else if(hour >= times[0] && hour < times[1][0] + 24){
+    return {hours: times[1][0] + 24 - hour, minutes: 60 - times[1][1]};
+  }else if(hour < times[1][0] && hour < 12 && times[1][0] < 12){
+    return {hours: times[1][0] + 24 - hour, minutes: 60 - times[1][1]};
+  }else if(hour == times[1][0] && minute < times[1][1]){
+    return {hours: 0, minutes: 60 - times[1][1]}
   }
 };
 
@@ -195,12 +201,12 @@ Location.prototype.displayable = function(){
         this.name().toUpperCase() + '</div><div class="location-time locations-text">';
 
   var todaytimes = this.getTimes(today);
-  var timeUntil = this.timeLeft(today.getHours(), today.getMinutes(), this.getTimes(today));
+  var timeUntil = this.timeLeft(today.getHours(), today.getMinutes(), todaytimes);
 
   if(timeUntil == null){
     div += "Closed";
   }else if(timeUntil.hours > 2){
-    div += "Open until " + (todaytimes[1] > 12 ? todaytimes[1] - 12 : todaytimes[1]);
+    div += "Open until " + (todaytimes[1][0] > 12 ? todaytimes[1][0] - 12 : todaytimes[1][0]);
   }else if(timeUntil.hours == 0){
     div += "Closes in " + timeUntil.minutes + " minutes";
   }else if(timeUntil.minutes == 0){
@@ -224,7 +230,7 @@ Location.prototype.displayable = function(){
   var schedule = this.weekSchedule(today);
 
   for(var i = 0; i < schedule.length; i++){
-    div += '<div class="upcoming-schedule-row">' + schedule[i].day + '<div class="schedule-times">' + schedule[i].t[0] + " to " + schedule[i].t[1] + '</div></div>';
+    div += '<div class="upcoming-schedule-row">' + schedule[i].day + '<div class="schedule-times">' + schedule[i].t[0] + " to " + (schedule[i].t[1][0] > 12 ? schedule[i].t[1][0] - 12 : schedule[i].t[1][0] ) + '</div></div>';
   }
 
   div += '</div>';
