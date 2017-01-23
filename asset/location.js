@@ -51,10 +51,10 @@ Location.prototype.getTimes = function(date){
 
 Location.prototype.isOpen = function(date) {
   curTime = date.getHours();
-  console.log(this.attr.times);
+  // console.log(this.attr.times);
   var times = null;
   for (var i = 0; i < this.attr.times.length; i++) {
-    console.log(this.attr.times[i]);
+    // console.log(this.attr.times[i]);
     times = this.attr.times[i].getTimes(date);
     if (times != null) {
       break;
@@ -64,10 +64,22 @@ Location.prototype.isOpen = function(date) {
   if (times === null)
     return false;
 
-  if (curTime < times[0] || curTime >= times[1][0])
-    return false;
-  else
+  // if the current time is less than the start time, it must be the morning
+  if (curTime < times[0]){
+    if(curTime > 12){
+      return true;
+    }else{
+      return curTime <= times[1][0];
+    }
+  }else{
+    // if the current time is greater than the stop time and the stop time is in the evening, false
+    if(curTime >= times[1][0] && times[1][0] > 12){
+      return false;
+    }
+
     return true;
+
+  }
 };
 
 Location.prototype.weekSchedule = function(date) {
@@ -104,24 +116,24 @@ Location.prototype.weekSchedule = function(date) {
 };
 
 Location.prototype.timeLeft = function(hour,minute,times){
-  console.log(hour + minute + times);
+  // console.log(hour + minute + times);
   if (hour >= times[0] && hour < times[1][0]) {
     if (minute === 0)
-      return {hours: times[1][0] - hour, minutes: times[1][1] - 0};
+      return {hours: times[1][0] - hour, minutes: times[1][1] - minute};
     else
-      return {hours: times[1][0] - hour - 1, minutes: 60 - times[1][1] - minute};
+      return {hours: times[1][0] - hour - 1, minutes: times[1][1] - minute};
   }else if(hour >= times[0] && hour < times[1][0] + 24){
-    return {hours: times[1][0] + 24 - hour, minutes: 60 - times[1][1]};
+    return {hours: times[1][0] + 24 - hour, minutes: times[1][1] - minute};
   }else if(hour < times[1][0] && hour < 12 && times[1][0] < 12){
-    return {hours: times[1][0] + 24 - hour, minutes: 60 - times[1][1]};
+    return {hours: times[1][0] + 24 - hour, minutes: times[1][1] - minute};
   }else if(hour == times[1][0] && minute < times[1][1]){
-    return {hours: 0, minutes: 60 - times[1][1]}
+    return {hours: 0, minutes: times[1][1] - minute}
   }
 };
 
 Location.prototype.nextOpen = function(today){
   var nextDay = this.nextDay(today);
-  console.log(nextDay);
+  // console.log(nextDay);
   curTime = nextDay.getHours();
   var times = null;
   for (var i = 0; i < this.attr.times.length; i++) {
@@ -130,7 +142,7 @@ Location.prototype.nextOpen = function(today){
       break;
     }
   }
-  console.log(times);
+  // console.log(times);
   if (times === null)
     return this.nextOpen(nextDay);
 
@@ -199,16 +211,21 @@ Location.prototype.displayable = function(){
 
   var open = this.isOpen(today);
 
+  console.log(open);
+
   var div = '<div class="location-button" style="background-color:' + (open ? '#03a678' : '#c8626a') + ';"><div ontouchstart="toggleDropdown(this.children[0].innerHTML)" style="width: 53%;"><div class="location-name locations-text">'+
         this.name().toUpperCase() + '</div><div class="location-time locations-text">';
 
   var todaytimes = this.getTimes(today);
   var timeUntil = this.timeLeft(today.getHours(), today.getMinutes(), todaytimes);
+  // var timeUntil = this.timeLeft(9, 20, todaytimes);
+
 
   if(timeUntil == null){
     div += "Closed";
   }else if(timeUntil.hours > 2){
-    div += "Open until " + (todaytimes[1][0] > 12 ? todaytimes[1][0] - 12 : todaytimes[1][0]);
+    div += "Open until " + (todaytimes[1][0] > 12 ? todaytimes[1][0] - 12 : todaytimes[1][0]) + ":" + ((todaytimes[1][1] + "").length == 1 ? "0" : "") + todaytimes[1][1] +
+     " " + (todaytimes[1][0] > 12 ? "PM" : "AM");
   }else if(timeUntil.hours == 0){
     div += "Closes in " + timeUntil.minutes + " minutes";
   }else if(timeUntil.minutes == 0){

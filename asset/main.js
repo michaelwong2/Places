@@ -19,6 +19,9 @@ Main = {
       case 2:
         page = this.loadAll();
         break;
+      case 3:
+        page = this.loadFood();
+        break;
       default: page = this.loadFavorites();
     }
 
@@ -70,7 +73,7 @@ Main = {
     console.log(locations);
 
     if(locations == null){
-      Main.appendToMain("<div class='nothing-alerter'>No Locations</div>");
+      this.appendToMain("<div class='nothing-alerter'>No Locations</div>");
       return;
     }
 
@@ -82,6 +85,19 @@ Main = {
       // if(thisloc.isOpen(new Date()))
       s += thisloc.displayable();
     }
+
+    return s;
+  },
+  loadFood: function(){
+
+    var loadedfoodevents = null;
+
+    if(loadedfoodevents == null){
+      this.appendToMain("<div class='nothing-alerter'>No Events with Free Food</div>");
+      return;
+    }
+
+    var s = "";
 
     return s;
   },
