@@ -12,5 +12,5 @@ window.onload = function() {
   console.log(new Date());
   console.log(loc.isOpen(new Date()));
 
-  Storage.addToFavorites(loc);
+  // Storage.addToFavorites(loc);
 }
