@@ -17,6 +17,7 @@ function togglePopout(text){
   }
 
   Events._popout = !Events._popout;
+<<<<<<< HEAD
 }
 
 Events.loadEventsFromXML = function() {
@@ -435,4 +436,6 @@ Text.prototype.getEndDate = function() {
 
 Text.prototype.getWords = function(){
     return this._words;
+=======
+>>>>>>> 6f91d649ca076f50d31e33efca00e38141d2b713
 }
