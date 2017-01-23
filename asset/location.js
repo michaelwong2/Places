@@ -104,6 +104,7 @@ Location.prototype.weekSchedule = function(date) {
 };
 
 Location.prototype.timeLeft = function(hour,minute,times){
+  console.log(hour + minute + times);
   if (hour >= times[0] && hour < times[1][0]) {
     if (minute === 0)
       return {hours: times[1][0] - hour, minutes: times[1][1] - 0};

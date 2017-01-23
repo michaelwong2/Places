@@ -18,19 +18,24 @@
 }
 
 .location-name{
-  font-size: 22px;
+  font-size: 18px;
   margin-top: 5px;
+  color: #f2f1ef;
 }
 
 .location-time{
-  font-size: 16px;
+  font-size: 15px;
   margin-top: 3px;
   width: auto;
+  color: #f2f1ef;
+  font-family: "Lora";
 }
 
 .location-events{
   font-size: 15px;
   margin-top: 5px;
+  color: #f2f1ef;
+  font-family: "Lora";
 }
 
 .location-eventtrig{
