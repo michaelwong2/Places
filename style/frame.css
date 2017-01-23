@@ -38,7 +38,7 @@
   height: calc(100vh - 120px);
   width: 100vw;
   float: left;
-  color: white;
+  color: #ba8d98;
   line-height: calc(100vh - 120px);
   text-align: center;
   font-size: 18px;
@@ -48,8 +48,8 @@
   height: 20px;
   width: 20px;
   position: absolute;
-  left: 20px;
-  top: 20px;
+  left: 22px;
+  top: 16px;
 }
 
 input#search-bar{
@@ -83,5 +83,6 @@ input#search-bar{
     z-index: 11;
     left: calc(5vw - 5px);
     top: 100px;
+    border-radius: 8px;
     padding: 5px;
   }
