@@ -2,9 +2,9 @@
   height: 80px;
   width: 94vw;
   margin-left: 3vw;
-  background-color: indianred;
+  background-color: #d24d57;
   margin-top: 10px;
-  border-radius: 2px;
+  border-radius: 8px;
   float: left;
   position: relative;
 }
@@ -56,7 +56,7 @@
   height: 125px;
   width: 90vw;
   margin-left: 5vw;
-  background-color: #c7c7c7;
+  background-color: #d9cfdd;
 
   border: none;
   border-top: none;
@@ -94,9 +94,9 @@
   float: left;
   position: relative;
   margin-left: 4vw;
-  background-color: #67809f;
+  background-color: #ba8d98;
   margin-top: 10px;
-  border-radius: 2px;
+  border-radius: 8px;
 
   color: white;
   font-size: 28px;
