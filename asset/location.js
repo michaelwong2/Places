@@ -88,7 +88,58 @@ Location.prototype.nextDay = function(today) {
   var date = today.getDate();
   var month = today.getMonth()+1;
   var year = today.getFullYear();
-}
+
+  if (date <= 27) {
+      console.log(date + month + year);
+      today.setDate(date+1);
+    }else{
+      switch(date) {
+        case 28:
+          if (month === 2) {
+            if (year % 4 != 0) {
+              today.setDate(1);
+              today.setMonth(2);
+            } else if (year % 100 != 0)
+              today.setDate(date+1);
+            else if (year % 400 != 0) {
+              today.setDate(1);
+              today.setMonth(2);
+            } else
+              today.setDate(date+1);
+          } else
+            today.setDate(date+1);
+        break;
+
+        case 29:
+          if (month === 2) {
+            today.setDate(1);
+            today.setMonth(2);
+          } else
+            today.setDate(date+1);
+          break;
+
+        case 30:
+          switch (month) {
+            case 4: case 6: case 9: case 11:
+              today.setDate(1);
+              today.setMonth(month+1);
+              break;
+            default:
+              today.setDate(date+1);
+          }
+        default:
+          if (month === 12) {
+            today.setDate(1);
+            today.setMonth(0);
+            today.setFullYear(year+1);
+          } else {
+            today.setDate(1);
+            today.setMonth(month+1);
+          }
+      }
+    }
+    return today;
+};
 
 Location.prototype.displayable = function(){
 
@@ -125,59 +176,9 @@ Location.prototype.rmFromFavorites = function(){
   Main.loadPage();
 }
 
-Location.prototype.timeLeft = function(timeNow,times){
-/*
-if (date <= 27) {
-    console.log(date + month + year);
-    today.setDate(date+1);
-  }else{
-    switch(date) {
-      case 28:
-        if (month === 2) {
-          if (year % 4 != 0) {
-            today.setDate(1);
-            today.setMonth(2);
-          } else if (year % 100 != 0)
-            today.setDate(date+1);
-          else if (year % 400 != 0) {
-            today.setDate(1);
-            today.setMonth(2);
-          } else
-            today.setDate(date+1);
-        } else
-          today.setDate(date+1);
-      break;
 
-      case 29:
-        if (month === 2) {
-          today.setDate(1);
-          today.setMonth(2);
-        } else
-          today.setDate(date+1);
-        break;
 
-      case 30:
-        switch (month) {
-          case 4: case 6: case 9: case 11:
-            today.setDate(1);
-            today.setMonth(month+1);
-            break;
-          default:
-            today.setDate(date+1);
-        }
-      default:
-        if (month === 12) {
-          today.setDate(1);
-          today.setMonth(0);
-          today.setFullYear(year+1);
-        } else {
-          today.setDate(1);
-          today.setMonth(month+1);
-        }
-    }
-  }
-  return today;*/
-}
+
 
 function getLocationById(id){
   var locations = Storage.getObject(Storage._locationNameSpace);
