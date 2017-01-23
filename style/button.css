@@ -12,7 +12,7 @@
 .locations-text{
     margin-left: 30px;
     float: left;
-    width: 50%;
+    width: 70%;
     height: auto;
     color: white;
 }
@@ -107,4 +107,22 @@
   font-size: 28px;
   line-height: calc(100vh / 5.5);
   text-align: center;
+}
+
+/* food */
+
+.event-button{
+  height: 100px;
+  width: 90vw;
+  margin-left: 5vw;
+  margin-top: 10px;
+  background-color: #d9cfdd;
+}
+
+.event-name{
+  height: auto;
+  width: 80vw;
+  float: left;
+  padding-left: 10px;
+  margin-top: 10px;
 }

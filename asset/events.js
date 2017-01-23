@@ -6,18 +6,17 @@ Events = {
 }
 
 function togglePopout(text){
-  document.getElementById("popout").style.display = Events._popout ? "none" : "block";
-
-  if(!Events._popout){
-    if(text.length > 0){
-      document.getElementById("event-displayer").innerHTML = "Events <br>" + text;
-    }else{
-      document.getElementById("event-displayer").innerHTML = "Events <br><br><span style='color: grey;'>There are no events</span>";
-    }
-  }
-
-  Events._popout = !Events._popout;
-<<<<<<< HEAD
+  // document.getElementById("popout").style.display = Events._popout ? "none" : "block";
+  //
+  // if(!Events._popout){
+  //   if(text.length > 0){
+  //     document.getElementById("event-displayer").innerHTML = "Events <br>" + text;
+  //   }else{
+  //     document.getElementById("event-displayer").innerHTML = "Events <br><br><span style='color: grey;'>There are no events</span>";
+  //   }
+  // }
+  //
+  // Events._popout = !Events._popout;
 }
 
 Events.loadEventsFromXML = function() {
@@ -436,6 +435,4 @@ Text.prototype.getEndDate = function() {
 
 Text.prototype.getWords = function(){
     return this._words;
-=======
->>>>>>> 6f91d649ca076f50d31e33efca00e38141d2b713
 }
