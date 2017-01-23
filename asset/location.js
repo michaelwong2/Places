@@ -3,21 +3,42 @@ var Location = function() {
     name: null,
     times: [],
     category: null,
-    open: true
+    open: true,
+    allthetime: false
   };
 };
 
 //create a new location
-Location.prototype.update = function(name, times, category) {
-  console.log(this);
+Location.prototype.update = function(name, times, category, all) {
+  // console.log(this);
   this.attr.name = name;
   this.attr.times = times;
   this.attr.category = category;
+  this.attr.allthetime = all;
+
+  Storage.addToLocations(this);
+  // console.log(Storage.getObject(Storage._locationNameSpace));
 };
+
+Location.prototype.load = function(attr){
+  this.attr = attr;
+
+  for(var i = 0; i < this.attr.times.length; i++){
+    var ntime = new Time(0,12);
+    ntime.load(this.attr.times[i]);
+    this.attr.times[i] = ntime;
+  }
+
+
+}
+
+Location.prototype.name = function(){
+  return this.attr.name;
+}
 
 Location.prototype.isOpen = function(date) {
   curTime = date.getHours();
-  console.log(curTime);
+  // console.log(curTime);
   var times = null;
   for (var i = 0; i < this.attr.times.length; i++) {
     times = this.attr.times[i].getTimes(date);
@@ -25,7 +46,7 @@ Location.prototype.isOpen = function(date) {
       break;
     }
   }
-  console.log(times);
+  // console.log(times);
   if (times === null)
     return false;
 
@@ -34,6 +55,7 @@ Location.prototype.isOpen = function(date) {
   else
     return true;
 };
+
 
 Location.prototype.timeLeft = function(hour,minute,times){
   if (hour >= times[0] && hour < times[1]) {
@@ -70,6 +92,44 @@ Location.prototype.nextDay = function(today) {
   if (date <= 27) {
       console.log(date + month + year);
       today.setDate(date+1);
+
+Location.prototype.displayable = function(){
+
+  var today = new Date();
+
+  var open = this.isOpen(today);
+
+  var div = '<div class="location-button" style="background-color:' + (open ? 'green' : 'red') + ';"><div ontouchstart="toggleDropdown(this.children[0].innerHTML)" style="width: 53%;"><div class="location-name locations-text">'+
+        this.name().toUpperCase() + '</div><div class="location-time locations-text">' +
+        10 + '</div><div class="location-events locations-text">' +
+        'nothing' + '</div></div><div class="location-eventtrig" ontouchstart="togglePopout(Events.loadEvents(`' + this.name() + '`));">...</div>';
+
+  if(!Storage.hasThisFavorite(this.name())){
+      div += '<div class="location-favorite" id="' + this.name() + '" ontouchstart="getLocationById(this.id).addToFavorites()">[+]</div></div>';
+  }else{
+      div += '<div class="location-favorite" id="' + this.name() + '" ontouchstart="getLocationById(this.id).rmFromFavorites()">[x]</div></div>';
+  }
+
+  div += '<div id="dp-' + this.name().toLowerCase() + '" class="dropdown" style="display: none;"></div>';
+
+  return div;
+}
+
+Location.prototype.addToFavorites = function(){
+  console.log("Adding to favorites");
+  Storage.addToFavorites(this.name());
+
+  Main.loadPage();
+}
+
+Location.prototype.rmFromFavorites = function(){
+  console.log("Removing from favorites");
+  Storage.removeFromFavorites(this.name());
+  Main.loadPage();
+}
+
+Location.prototype.timeLeft = function(timeNow,times){
+
 
   }else {
     switch(date) {
@@ -119,3 +179,48 @@ Location.prototype.nextDay = function(today) {
   }
   return today;
 };
+
+function getLocationById(id){
+  var locations = Storage.getObject(Storage._locationNameSpace);
+
+  if(locations != null){
+    id = id.toLowerCase();
+
+    for(var k in locations){
+      thisloc = new Location();
+      thisloc.load(locations[k].attr);
+
+      if(thisloc.name().toLowerCase() == id){
+        return thisloc;
+      }
+
+    }
+  }
+
+  return null;
+}
+
+function toggleDropdown(id){
+    id = "dp-" + id.toLowerCase();
+
+    if(!document.getElementById(id))
+      return;
+
+    x = document.getElementById(id).style.display == "block";
+
+    document.getElementById(id).style.display = !x ? "block" : "none";
+
+    if(!x){
+
+      var elements = document.getElementsByClassName('animateDrop');
+
+      for(var i = 0; i < elements.length; i++){
+        elements[i].style.display = "none";
+        elements[i].className = "dropdown";
+      }
+
+      document.getElementById(id).className += " animateDrop";
+    }else{
+      document.getElementById(id).className = "dropdown";
+    }
+}

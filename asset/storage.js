@@ -8,6 +8,22 @@ Storage = {
   getObject: function(namespace){
     return JSON.parse(window.localStorage.getItem(namespace));
   },
+  findMatch: function(array, match){
+    for(var i = 0; i < array.length; i++){
+      if(array[i] == match)
+        return true;
+    }
+
+    return false;
+  },
+  hasFavorites: function(){
+    var l = this.getObject(this._favoritesNameSpace);
+    return l != null && l.favarray.length > 0;
+  },
+  hasThisFavorite: function(x){
+    var fs = this.getObject(this._favoritesNameSpace);
+    return fs != null && this.findMatch(fs.favarray, x);
+  },
   addToFavorites: function(location){
     // get the object from local storage
     var favs = this.getObject(this._favoritesNameSpace);
@@ -17,7 +33,7 @@ Storage = {
       favs = {
         favarray: []
       }
-    }else if(favs.favarray.indexOf(location) > -1){
+    }else if(this.findMatch(favs.favarray, location)){
       // if the location already exists in favorites return
       return;
     }

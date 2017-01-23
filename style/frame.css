@@ -27,7 +27,7 @@
 
 .tab{
   height: 50px;
-  width: 33.3vw;
+  width: 25vw;
   float: left;
   color: white;
   text-align: center;
@@ -43,3 +43,43 @@
   text-align: center;
   font-size: 18px;
 }
+
+#search-icon{
+  height: 40px;
+  width: 40px;
+  background-color: white;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+
+input#search-bar{
+  height: 40px;
+  width: 73vw;
+  position:absolute;
+  right: 20px;
+  top: 20px;
+  border: none;
+  border-radius: 3px;
+  padding-left: 10px;
+  font-size: 20px;
+}
+
+#popout{
+  height: calc(100vh - 120px);
+  width: 100vw;
+  background-color: rgba(0,0,0,0.4);
+  position: absolute;
+  z-index: 10;
+  top: 70px;
+}
+
+  #event-displayer{
+    height: 300px;
+    width: 90vw;
+    background-color: #aaeeaa;
+    position: absolute;
+    z-index: 11;
+    left: 5vw;
+    top: 100px;
+  }
