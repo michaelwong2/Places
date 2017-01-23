@@ -36,6 +36,19 @@ Location.prototype.name = function(){
   return this.attr.name;
 }
 
+Location.prototype.getTimes = function(date){
+  var times = null;
+
+  for (var i = 0; i < this.attr.times.length; i++) {
+    times = this.attr.times[i].getTimes(date);
+    if (times != null) {
+      break;
+    }
+  }
+
+  return times;
+}
+
 Location.prototype.isOpen = function(date) {
   curTime = date.getHours();
   // console.log(curTime);
@@ -179,9 +192,26 @@ Location.prototype.displayable = function(){
   var open = this.isOpen(today);
 
   var div = '<div class="location-button" style="background-color:' + (open ? 'green' : 'red') + ';"><div ontouchstart="toggleDropdown(this.children[0].innerHTML)" style="width: 53%;"><div class="location-name locations-text">'+
-        this.name().toUpperCase() + '</div><div class="location-time locations-text">' +
-        10 + '</div><div class="location-events locations-text">' +
-        'nothing' + '</div></div><div class="location-eventtrig" ontouchstart="togglePopout(Events.loadEvents(`' + this.name() + '`));"><img src="res/Event.png" height="5" width="20" style="z-index:9; margin-top: 39px;"></div>';
+        this.name().toUpperCase() + '</div><div class="location-time locations-text">';
+
+  var todaytimes = this.getTimes(today);
+  var timeUntil = this.timeLeft(today.getHours(), today.getMinutes(), this.getTimes(today));
+
+  if(timeUntil == null){
+    div += "Closed";
+  }else if(timeUntil.hours > 2){
+    div += "Open until " + (todaytimes[1] > 12 ? todaytimes[1] - 12 : todaytimes[1]);
+  }else if(timeUntil.hours == 0){
+    div += "Closes in " + timeUntil.minutes + " minutes";
+  }else if(timeUntil.minutes == 0){
+    div += "Closes in " + timeUntil.hours + " hours";
+  }else{
+    div += "Closes in " + timeUntil.hours + " hours";
+  }
+
+  div += '</div><div class="location-events locations-text">' + 'nothing' +
+  '</div></div><div class="location-eventtrig" ontouchstart="togglePopout(Events.loadEvents(`' + this.name() +
+  '`));"><img src="res/Event.png" height="5" width="20" style="z-index:9; margin-top: 39px;"></div>';
 
   if(!Storage.hasThisFavorite(this.name())){
       div += '<div class="location-favorite" id="' + this.name() + '" ontouchstart="getLocationById(this.id).addToFavorites()"><img src="res/Star_inactive.png" height="20" width="20" style="z-index:9; margin-top: 30px;"></div></div>';
@@ -189,7 +219,15 @@ Location.prototype.displayable = function(){
       div += '<div class="location-favorite" id="' + this.name() + '" ontouchstart="getLocationById(this.id).rmFromFavorites()"><img src="res/Star.png" height="20" width="20" style="z-index:9; margin-top: 30px;"></div></div>';
   }
 
-  div += '<div id="dp-' + this.name().toLowerCase() + '" class="dropdown" style="display: none;"></div>';
+  div += '<div id="dp-' + this.name().toLowerCase() + '" class="dropdown" style="display: none;">';
+
+  var schedule = this.weekSchedule(today);
+
+  for(var i = 0; i < schedule.length; i++){
+    div += '<div class="upcoming-schedule-row">' + schedule[i].day + '<div class="schedule-times">' + schedule[i].t[0] + " to " + schedule[i].t[1] + '</div></div>';
+  }
+
+  div += '</div>';
 
   return div;
 }
